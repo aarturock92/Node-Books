@@ -2,7 +2,7 @@ const express = require('express');
 const userController = require('../controllers/UserController');
 const api = express.Router();
 
-api.get('/users', (req, res) => {
+api.get('/User', (req, res) => {
     userController.getUsers((err, users) => {
         if(err)
             throw err;
@@ -11,7 +11,7 @@ api.get('/users', (req, res) => {
     });
 });
 
-api.post('/users', (req, res) => {
+api.post('/User', (req, res) => {
     const user = req.body;
 
     userController.createUser(user, (err, user) => {
@@ -22,7 +22,7 @@ api.post('/users', (req, res) => {
     });
 })
 
-api.delete('/users/:userId' ,(req, res) => {
+api.delete('/User/:userId' ,(req, res) => {
         const userId = req.params.userId;
 
         userController.deleteUser(userId, (err) => {
@@ -35,7 +35,7 @@ api.delete('/users/:userId' ,(req, res) => {
 });
 
 
-api.get('/users/:userId', (req, res) => {
+api.get('/User/:userId', (req, res) => {
     const userId = req.params.userId;
 
     userController.getUserById(userId, (err, user) => {
@@ -49,7 +49,7 @@ api.get('/users/:userId', (req, res) => {
     });
 });
 
-api.put('/users/:userId', (req, res) => {
+api.put('/User/:userId', (req, res) => {
     const userId = req.params.userId;
     const userEntity = req.body;
 
