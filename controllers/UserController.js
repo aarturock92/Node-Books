@@ -24,8 +24,9 @@ module.exports.getUserById = (userId, callback) => {
 }
 
 module.exports.updateUser = (userId, userEntity, callback) => {
-    console.log('userEntity', userEntity);
-    console.log('userId', userId);
-
     User.findOneAndUpdate({_id: userId}, userEntity, { new: true }, callback);
+}
+
+module.exports.paginateUser = (callBackFunction) => {
+    return User.paginate({}, { offset: 30, limit: 20 }, callBackFunction);
 }

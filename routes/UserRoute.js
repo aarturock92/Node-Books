@@ -2,6 +2,19 @@ const express = require('express');
 const userController = require('../controllers/UserController');
 const api = express.Router();
 
+
+
+api.get('/User/Paginate', (req, res) => {
+    console.log('entro');
+    userController.paginateUser((err, result) => {
+        console.log('err', err);
+        console.log('result', result);
+    }).then(function(result){
+        console.log('result', result);
+    })
+    
+})
+
 api.get('/User', (req, res) => {
     userController.getUsers((err, users) => {
         if(err)
@@ -61,5 +74,7 @@ api.put('/User/:userId', (req, res) => {
     }); 
 
 })
+
+
 
 module.exports = api;

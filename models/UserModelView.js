@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
+let mongoose = require('mongoose');
+let mongoosePaginate = require('../shared/index')
 
-const UserSchema = mongoose.Schema({
+let UserSchema = mongoose.Schema({
     Name: String,
     FirstLastName: String,
     SecondLastName: String,
@@ -9,4 +10,7 @@ const UserSchema = mongoose.Schema({
     Password: String
 })
 
-const User = module.exports = mongoose.model('User', UserSchema);
+
+UserSchema.plugin(mongoosePaginate);
+
+let User = module.exports = mongoose.model('User', UserSchema);
