@@ -4,14 +4,16 @@ const api = express.Router();
 
 
 
-api.get('/User/Paginate', (req, res) => {
-    console.log('entro');
-    userController.paginateUser((err, result) => {
-        console.log('err', err);
-        console.log('result', result);
-    }).then(function(result){
-        console.log('result', result);
-    })
+api.get('/User/Search/:page/:itemsPerPage', (req, res) => {
+    let page = parseInt(req.params.page),
+        itemsPerPage = parseInt(req.params.itemsPerPage);
+
+    userController.paginateUser(page, itemsPerPage, function(err, result) {
+        if(err)
+            throw err;
+
+        res.json(result).status(200);
+    });
     
 })
 
@@ -25,7 +27,7 @@ api.get('/User', (req, res) => {
 });
 
 api.post('/User', (req, res) => {
-    const user = req.body;
+    let user = req.body;
 
     userController.createUser(user, (err, user) => {
         if(err)
@@ -36,7 +38,7 @@ api.post('/User', (req, res) => {
 })
 
 api.delete('/User/:userId' ,(req, res) => {
-        const userId = req.params.userId;
+        let userId = req.params.userId;
 
         userController.deleteUser(userId, (err) => {
             if(err)
@@ -49,7 +51,7 @@ api.delete('/User/:userId' ,(req, res) => {
 
 
 api.get('/User/:userId', (req, res) => {
-    const userId = req.params.userId;
+    let userId = req.params.userId;
 
     userController.getUserById(userId, (err, user) => {
         if(err)
@@ -63,8 +65,8 @@ api.get('/User/:userId', (req, res) => {
 });
 
 api.put('/User/:userId', (req, res) => {
-    const userId = req.params.userId;
-    const userEntity = req.body;
+    let userId = req.params.userId,
+        userEntity = req.body;
 
     userController.updateUser(userId, userEntity, (err, user) => {
         if(err)

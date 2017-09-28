@@ -1,5 +1,5 @@
 let mongoose = require('mongoose');
-let mongoosePaginate = require('../shared/index')
+let mongoosePaginate = require('mongoose-paginate');
 
 let UserSchema = mongoose.Schema({
     Name: String,
@@ -10,7 +10,7 @@ let UserSchema = mongoose.Schema({
     Password: String
 })
 
+UserSchema.plugin(mongoosePaginate)
 
-UserSchema.plugin(mongoosePaginate);
 
 let User = module.exports = mongoose.model('User', UserSchema);
